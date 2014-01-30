@@ -3,12 +3,16 @@
   "version": "0.0.1",
   "description": "getting started with gulp",
   "dependencies": {
-    "lodash": "~2.4.1",
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "gulp-util": "~2.2.12",
     "gulp": "~3.4.0",
     "gulp-browserify": "~0.3.3",
     "gulp-concat": "~2.1.7",
+    "gulp-livereload": "~0.2.0",
+    "tiny-lr": "0.0.5",
+    "express": "~3.4.8",
+    "connect-livereload": "~0.3.2"
   }
 }
