@@ -1,0 +1,14 @@
+{
+  "name": "minimal-gulp",
+  "version": "0.0.1",
+  "description": "getting started with gulp",
+  "dependencies": {
+    "lodash": "~2.4.1",
+  },
+  "devDependencies": {
+    "gulp-util": "~2.2.12",
+    "gulp": "~3.4.0",
+    "gulp-browserify": "~0.3.3",
+    "gulp-concat": "~2.1.7",
+  }
+}
