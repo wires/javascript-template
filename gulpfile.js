@@ -14,36 +14,40 @@ app.use(express.static(__dirname + '/dist'));
 app.listen(4000);
 
 // start livereload server
-var refresh = require('gulp-livereload');
-var server = require('tiny-lr')();
-server.listen(35729, function(err) {
-	if(err) return console.log(err);
-});
+var livereload = require('gulp-livereload');
 
 function dest() {
 	return gulp.dest('./dist/');
 }
 
-
 console.log("Live-reload server started at http://localhost:4000");
 
-gulp.task('default', function(){
-  gulp.src('./src/index.html')
-    .pipe(dest())
-	.pipe(refresh(server));
-
-  gulp.src('./src/js/index.js')
-    .pipe(browserify())
-    .pipe(concat('bundle.js'))
-    .pipe(dest())
-	.pipe(refresh(server));
-
-  gulp.src('./src/css/**')
-    .pipe(concat('style.css'))
-    .pipe(dest())
-	.pipe(refresh(server));
+gulp.task('html', function() {
+  return gulp.src('src/index.html')
+      .pipe(dest())
+      .pipe(livereload());
 });
 
-gulp.watch('src/**', function(){
-  gulp.run('default');
+gulp.task('scripts', function() {
+    return gulp.src('src/js/index.js')
+        .pipe(browserify())
+        .pipe(concat('bundle.js'))
+        .pipe(dest())
+        .pipe(livereload());
+});
+
+gulp.task('style', function() {
+    gulp.src('./src/css/**')
+        .pipe(concat('style.css'))
+        .pipe(dest())
+        .pipe(livereload());
+});
+
+gulp.task('default', function(){
+
+    gulp.watch('src/js/**/*.js', ['scripts']);
+    gulp.watch('src/css/**/*.css', ['style']);
+    gulp.watch('src/*.html', ['html']);
+
+    livereload.listen();
 });
